@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>Projects </h1>
+
+<img src="{% static 'images/cat.jpg' %}" style="width: 200px;"/>
+
+<!--<h1>Name: {{ name }}</h1>-->
+
+<!--{% if age > 27 %}-->
+<!--<h4>{{ name }} is older than 27</h4>-->
+
+<!--{% elif age == 27 %}-->
+<!--<h4>{{ name }} is 27</h4>-->
+<!--{% else %}-->
+<!--<h4>{{ name }} is younger than 27</h4>-->
+<!--{% endif %}-->
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for project in projects %}
+        <tr>
+            <td><a href="{% url 'project' project.id %}">{{ project.title }} {% if project.topRated%} <strong>TOP RATED</strong> {% endif %}</a></td>
+            <td>{{ project.description }}</td>
+            <td><a href="{% url 'update-project' project.id %}">Edit</a></td>
+            <td><a href="{% url 'delete-project' project.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock content %}
